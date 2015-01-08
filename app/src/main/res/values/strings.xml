@@ -2,9 +2,22 @@
 <resources>
 
     <string name="app_name">MyoSphero</string>
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="connect">Connect a Myo</string>
     <string name="main">Hey!</string>
+    <string name="left">The Myo is on your left arm!</string>
+    <string name="right">The Myo is on your right arm!</string>
+    <string name="sync">Perform the sync gesture</string>
+    <string name="disconnectMyo">Disconnect my Myo</string>
+    <string name="unsync">Arm lost!</string>
+    <string name="howSync">How do I perform the sync gesture?</string>
+    <string name="pFist">Fist</string>
+    <string name="pWaveIn">Wave In</string>
+    <string name="pWaveOut">Wave Out</string>
+    <string name="pFingersSpread">Fingers Spread</string>
+    <string name="title_activity_sphero_connect">spheroConnect</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="connectSphero">Connect a Sphero</string>
+    <string name="disconnectSphero">Disconnect Sphero</string>
 
 </resources>
