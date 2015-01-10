@@ -1,6 +1,7 @@
 package com.rakeshdas.myosphero;
 
 import android.app.Activity;
+import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
@@ -180,5 +181,17 @@ public class MainActivity extends Activity {
             super.onOrientationData(myo, timestamp, rotation);
         }
     };
-
+    @Override
+    protected void onResume(){
+        super.onResume();
+        mSpheroConnectionView.startDiscovery();
+    }
+    @Override
+    protected void onPause(){
+        super.onPause();
+        BluetoothAdapter.getDefaultAdapter().cancelDiscovery();
+        if(mRobot != null){
+            mRobot.disconnect();
+        }
+    }
 }

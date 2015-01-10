@@ -19,5 +19,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="connectSphero">Connect a Sphero</string>
     <string name="disconnectSphero">Disconnect Sphero</string>
+    <string name="unlock">Myo is unlocked, perform gestures to move the Sphero</string>
+    <string name="lock">Myo is locked, double tap to unlock</string>
 
 </resources>
