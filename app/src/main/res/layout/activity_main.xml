@@ -44,5 +44,9 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:background="#FFF" />
+    <orbotix.view.calibration.CalibrationView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/CalibrationView"/>
 
 </RelativeLayout>

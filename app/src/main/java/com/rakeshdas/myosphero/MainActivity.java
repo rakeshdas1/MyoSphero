@@ -3,6 +3,7 @@ package com.rakeshdas.myosphero;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
@@ -25,6 +26,7 @@ import com.thalmic.myo.scanner.ScanActivity;
 import orbotix.robot.base.Robot;
 import orbotix.sphero.ConnectionListener;
 import orbotix.sphero.Sphero;
+import orbotix.view.calibration.CalibrationView;
 import orbotix.view.connection.SpheroConnectionView;
 
 
@@ -37,6 +39,7 @@ public class MainActivity extends Activity {
     private SpheroConnectionView mSpheroConnectionView;
     private Sphero mRobot;
     private String howSyncHelp = "<a href = 'https://support.getmyo.com/hc/en-us/articles/200755509-How-to-perform-the-sync-gesture'> How do I perform the sync gesture? </a>";
+    private CalibrationView mCalibrationView;
 
 
     @Override
@@ -56,6 +59,10 @@ public class MainActivity extends Activity {
                 scanMyos();
             }
         });
+        mCalibrationView = (CalibrationView)findViewById(R.id.CalibrationView);
+        mCalibrationView.setColor(Color.WHITE);
+        mCalibrationView.setCircleColor(Color.WHITE);
+        mCalibrationView.enable();
         mSpheroConnectionView = (SpheroConnectionView)findViewById(R.id.sphero_connection_view);mSpheroConnectionView.addConnectionListener(new ConnectionListener() {
             @Override
             public void onConnected(Robot robot) {
