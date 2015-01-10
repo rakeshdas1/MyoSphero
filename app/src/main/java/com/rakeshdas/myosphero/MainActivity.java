@@ -33,7 +33,7 @@ public class MainActivity extends Activity {
     private Button mConnect;
     private TextView mText;
     private String TAG = "MyoSphero";
-    private TextView mHowSync;
+    private TextView mCaptionTxt;
     private SpheroConnectionView mSpheroConnectionView;
     private Sphero mRobot;
     private String howSyncHelp = "<a href = 'https://support.getmyo.com/hc/en-us/articles/200755509-How-to-perform-the-sync-gesture'> How do I perform the sync gesture? </a>";
@@ -45,10 +45,10 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         mConnect = (Button)findViewById(R.id.connectBtn);
         mText = (TextView)findViewById(R.id.mainTextView);
-        mHowSync = (TextView)findViewById(R.id.howSyncTextView);
-        mHowSync.setClickable(true);
-        mHowSync.setMovementMethod(LinkMovementMethod.getInstance());
-        mHowSync.setText(Html.fromHtml(howSyncHelp));
+        mCaptionTxt = (TextView)findViewById(R.id.captionTextView);
+        mCaptionTxt.setClickable(true);
+        mCaptionTxt.setMovementMethod(LinkMovementMethod.getInstance());
+        mCaptionTxt.setText(Html.fromHtml(howSyncHelp));
         initHub();
         mConnect.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,7 +105,7 @@ public class MainActivity extends Activity {
             Toast.makeText(getApplicationContext(), "Myo Connected!", Toast.LENGTH_LONG).show();
             mText.setText(R.string.sync);
             mConnect.setText(R.string.disconnectMyo);
-            mHowSync.setVisibility(View.VISIBLE);
+            mCaptionTxt.setVisibility(View.VISIBLE);
         }
 
         @Override
@@ -114,14 +114,14 @@ public class MainActivity extends Activity {
             Toast.makeText(getApplicationContext(), "Myo Disconnected!", Toast.LENGTH_LONG).show();
             mText.setText(R.string.main);
             mConnect.setText(R.string.connect);
-            mHowSync.setVisibility(View.INVISIBLE);
+            mCaptionTxt.setVisibility(View.INVISIBLE);
         }
 
         @Override
         public void onArmSync(Myo myo, long timestamp, Arm arm, XDirection xDirection) {
             super.onArmSync(myo, timestamp, arm, xDirection);
             mText.setText(myo.getArm() == Arm.LEFT ? R.string.left : R.string.right);
-            mHowSync.setVisibility(View.INVISIBLE);
+            mCaptionTxt.setVisibility(View.INVISIBLE);
         }
 
         @Override
@@ -133,11 +133,13 @@ public class MainActivity extends Activity {
         @Override
         public void onUnlock(Myo myo, long timestamp) {
             super.onUnlock(myo, timestamp);
+            mCaptionTxt.setText(R.string.unlock);
         }
 
         @Override
         public void onLock(Myo myo, long timestamp) {
             super.onLock(myo, timestamp);
+            mCaptionTxt.setText(R.string.lock);
         }
 
         @Override
@@ -147,21 +149,25 @@ public class MainActivity extends Activity {
                 case FIST:{
                     mText.setText(R.string.pFist);
                     mRobot.drive(0f, 0.2f);
+                    myo.unlock(Myo.UnlockType.HOLD);
                     break;
                 }
                 case FINGERS_SPREAD:{
                     mText.setText(R.string.pFingersSpread);
                     mRobot.stop();
+                    myo.unlock(Myo.UnlockType.HOLD);
                     break;
                 }
                 case WAVE_IN:{
                     mText.setText(R.string.pWaveIn);
                     mRobot.drive(270f, 0.2f);
+                    myo.unlock(Myo.UnlockType.HOLD);
                     break;
                 }
                 case WAVE_OUT:{
                     mText.setText(R.string.pWaveOut);
                     mRobot.drive(90f, 0.2f);
+                    myo.unlock(Myo.UnlockType.HOLD);
                     break;
                 }
 
