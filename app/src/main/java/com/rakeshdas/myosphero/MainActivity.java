@@ -67,6 +67,7 @@ public class MainActivity extends Activity {
             @Override
             public void onConnected(Robot robot) {
                 mRobot = (Sphero) robot;
+                mCalibrationView.setRobot(mRobot);
             }
 
             @Override
