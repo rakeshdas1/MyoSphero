@@ -49,4 +49,13 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:id="@+id/CalibrationView"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/disconnectSphero"
+        android:id="@+id/disconnectSpheroBtn"
+        android:layout_below="@+id/connectBtn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="31dp" />
 </RelativeLayout>

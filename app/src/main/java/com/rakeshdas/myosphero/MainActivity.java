@@ -40,6 +40,7 @@ public class MainActivity extends Activity {
     private Sphero mRobot;
     private String howSyncHelp = "<a href = 'https://support.getmyo.com/hc/en-us/articles/200755509-How-to-perform-the-sync-gesture'> How do I perform the sync gesture? </a>";
     private CalibrationView mCalibrationView;
+    private Button mDisconnectSphero;
 
 
     @Override
@@ -52,7 +53,15 @@ public class MainActivity extends Activity {
         mCaptionTxt.setClickable(true);
         mCaptionTxt.setMovementMethod(LinkMovementMethod.getInstance());
         mCaptionTxt.setText(Html.fromHtml(howSyncHelp));
+        mDisconnectSphero = (Button)findViewById(R.id.disconnectSpheroBtn);
+        mDisconnectSphero.setVisibility(View.GONE);
         initHub();
+        mDisconnectSphero.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mRobot.disconnect();
+            }
+        });
         mConnect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,6 +77,7 @@ public class MainActivity extends Activity {
             public void onConnected(Robot robot) {
                 mRobot = (Sphero) robot;
                 mCalibrationView.setRobot(mRobot);
+                mDisconnectSphero.setVisibility(View.VISIBLE);
             }
 
             @Override
@@ -141,12 +151,14 @@ public class MainActivity extends Activity {
         @Override
         public void onUnlock(Myo myo, long timestamp) {
             super.onUnlock(myo, timestamp);
+            mCaptionTxt.setVisibility(View.VISIBLE);
             mCaptionTxt.setText(R.string.unlock);
         }
 
         @Override
         public void onLock(Myo myo, long timestamp) {
             super.onLock(myo, timestamp);
+            mCaptionTxt.setVisibility(View.VISIBLE);
             mCaptionTxt.setText(R.string.lock);
         }
 
@@ -186,7 +198,7 @@ public class MainActivity extends Activity {
 
             }
             else{
-                myo.unlock(Myo.UnlockType.TIMED);
+                myo.unlock(Myo.UnlockType.HOLD);
             }
         }
 
