@@ -10,6 +10,7 @@ import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,7 +42,9 @@ public class MainActivity extends Activity {
     private String howSyncHelp = "<a href = 'https://support.getmyo.com/hc/en-us/articles/200755509-How-to-perform-the-sync-gesture'> How do I perform the sync gesture? </a>";
     private CalibrationView mCalibrationView;
     private Button mDisconnectSphero;
-
+    private EditText mSpeed;
+    private Button mSetSpeed;
+    float speed = (float) 0.4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +75,14 @@ public class MainActivity extends Activity {
         mCalibrationView.setColor(Color.WHITE);
         mCalibrationView.setCircleColor(Color.WHITE);
         mCalibrationView.enable();
+        mSpeed = (EditText)findViewById(R.id.speedEditText);
+        mSetSpeed = (Button)findViewById(R.id.setSpeedBtn);
+        mSetSpeed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                speed = Float.parseFloat(mSpeed.getText().toString());
+            }
+        });
         mSpheroConnectionView = (SpheroConnectionView)findViewById(R.id.sphero_connection_view);mSpheroConnectionView.addConnectionListener(new ConnectionListener() {
             @Override
             public void onConnected(Robot robot) {
@@ -168,7 +179,7 @@ public class MainActivity extends Activity {
             switch (pose){
                 case FIST:{
                     mText.setText(R.string.pFist);
-                    mRobot.drive(0f, 0.2f);
+                    mRobot.drive(0f, speed);
                     myo.unlock(Myo.UnlockType.HOLD);
                     break;
                 }
@@ -180,14 +191,15 @@ public class MainActivity extends Activity {
                 }
                 case WAVE_IN:{
                     mText.setText(R.string.pWaveIn);
-                    mRobot.drive(270f, 0.2f);
+                    mRobot.drive(270f,speed);
                     myo.unlock(Myo.UnlockType.HOLD);
                     break;
                 }
                 case WAVE_OUT:{
                     mText.setText(R.string.pWaveOut);
-                    mRobot.drive(90f, 0.2f);
+                    mRobot.drive(90f, speed);
                     myo.unlock(Myo.UnlockType.HOLD);
+
                     break;
                 }
 
