@@ -15,6 +15,7 @@
         android:layout_centerHorizontal="true"
         android:elevation="5dp"/>
 
+    android:elevation="5dp"
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -24,7 +25,6 @@
         android:layout_centerHorizontal="true"
         android:textSize="@dimen/abc_text_size_display_2_material"
         android:layout_marginTop="38dp"
-        android:elevation="5dp"
         android:textColor="@color/primary_text"/>
 
     <TextView
@@ -38,27 +38,18 @@
         android:elevation="5dp"
         android:textSize="@dimen/abc_text_size_small_material"
         android:visibility="invisible"/>
-
     <orbotix.view.calibration.CalibrationView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:id="@+id/CalibrationView"/>
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/disconnectSphero"
-        android:id="@+id/disconnectSpheroBtn"
+        android:text="@string/connectSphero"
+        android:id="@+id/connectSpheroBtn"
         android:layout_below="@+id/connectBtn"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="31dp" />
-
-    <orbotix.view.connection.SpheroConnectionView
-        android:id="@+id/sphero_connection_view"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:background="#FFF" />
-
     <SeekBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -66,7 +57,8 @@
         android:max="100"
         android:layout_below="@+id/speedTextView"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="26dp" />
+        android:layout_marginTop="26dp"
+        android:progress="4"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -75,7 +67,14 @@
         android:id="@+id/speedTextView"
         android:elevation="5dp"
         android:textSize="@dimen/abc_text_size_medium_material"
-        android:layout_below="@+id/disconnectSpheroBtn"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/connectSpheroBtn"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/primary_text"/>
 
+    <orbotix.view.connection.SpheroConnectionView
+        android:id="@+id/sphero_connection_view"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="900dp"
+        android:background="#FFF"/>
 </RelativeLayout>

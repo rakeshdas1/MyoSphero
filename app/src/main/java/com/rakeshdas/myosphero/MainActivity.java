@@ -10,6 +10,7 @@ import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,10 +42,10 @@ public class MainActivity extends Activity {
     private Sphero mRobot;
     private String howSyncHelp = "<a href = 'https://support.getmyo.com/hc/en-us/articles/200755509-How-to-perform-the-sync-gesture'> How do I perform the sync gesture? </a>";
     private CalibrationView mCalibrationView;
-    private Button mDisconnectSphero;
+    private Button mConnectSphero;
     float speed = (float) 0.4;
     private SeekBar mSpeedSeek;
-
+    private TextView mSpeedText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,10 +55,53 @@ public class MainActivity extends Activity {
         mCaptionTxt = (TextView)findViewById(R.id.captionTextView);
         mSpeedSeek = (SeekBar)findViewById(R.id.speedSeekBar);
         mSpeedSeek.setMax(9);
+        mSpeedText = (TextView)findViewById(R.id.speedTextView);
         mSpeedSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                Toast.makeText(mSpeedSeek.getContext(), "val:" + getConvertedValue(progress), Toast.LENGTH_LONG).show();
+                //Toast.makeText(mSpeedSeek.getContext(), "val:" + progress, Toast.LENGTH_LONG).show();
+                switch (progress){
+                    case 0:
+                        mSpeedText.setText(R.string.speed10);
+                        speed = 10f;
+                        break;
+                    case 1:
+                        mSpeedText.setText(R.string.speed20);
+                        speed = 20f;
+                        break;
+                    case 2:
+                        mSpeedText.setText(R.string.speed30);
+                        speed = 30f;
+                        break;
+                    case 3:
+                        mSpeedText.setText(R.string.speed40);
+                        speed = 40f;
+                        break;
+                    case 4:
+                        mSpeedText.setText(R.string.speed50);
+                        speed = 50f;
+                        break;
+                    case 5:
+                        mSpeedText.setText(R.string.speed60);
+                        speed = 60f;
+                        break;
+                    case 6:
+                        mSpeedText.setText(R.string.speed70);
+                        speed = 70f;
+                        break;
+                    case 7:
+                        mSpeedText.setText(R.string.speed80);
+                        speed = 80f;
+                        break;
+                    case 8:
+                        mSpeedText.setText(R.string.speed90);
+                        speed = 90f;
+                        break;
+                    case 9:
+                        mSpeedText.setText(R.string.speed100);
+                        speed = 100f;
+                        break;
+                }
             }
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
@@ -72,13 +116,15 @@ public class MainActivity extends Activity {
         mCaptionTxt.setClickable(true);
         mCaptionTxt.setMovementMethod(LinkMovementMethod.getInstance());
         mCaptionTxt.setText(Html.fromHtml(howSyncHelp));
-        mDisconnectSphero = (Button)findViewById(R.id.disconnectSpheroBtn);
-        mDisconnectSphero.setVisibility(View.GONE);
+        mConnectSphero = (Button)findViewById(R.id.connectSpheroBtn);
+        //mConnectSphero.setVisibility(View.GONE);
         initHub();
-        mDisconnectSphero.setOnClickListener(new View.OnClickListener() {
+        mConnectSphero.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mRobot.disconnect();
+                RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)mSpheroConnectionView.getLayoutParams();
+                params.setMargins(0, 0, 0, 0);
+                mSpheroConnectionView.setLayoutParams(params);
             }
         });
         mConnect.setOnClickListener(new View.OnClickListener() {
@@ -96,7 +142,13 @@ public class MainActivity extends Activity {
             public void onConnected(Robot robot) {
                 mRobot = (Sphero) robot;
                 mCalibrationView.setRobot(mRobot);
-                mDisconnectSphero.setVisibility(View.VISIBLE);
+                mConnectSphero.setText(R.string.disconnectSphero);
+                mConnectSphero.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mRobot.disconnect();
+                    }
+                });
             }
 
             @Override
@@ -110,10 +162,6 @@ public class MainActivity extends Activity {
                 mSpheroConnectionView.startDiscovery();
             }
         });
-    }
-    public float getConvertedValue(int intVal){
-        speed = 0.5f * intVal;
-        return speed;
     }
 
     private void initHub(){
