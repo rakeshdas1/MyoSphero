@@ -9,6 +9,7 @@ import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
@@ -56,51 +57,56 @@ public class MainActivity extends Activity {
         mSpeedSeek = (SeekBar)findViewById(R.id.speedSeekBar);
         mSpeedSeek.setMax(9);
         mSpeedText = (TextView)findViewById(R.id.speedTextView);
+        //Set the speed via the seekbar
         mSpeedSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                //Toast.makeText(mSpeedSeek.getContext(), "val:" + progress, Toast.LENGTH_LONG).show();
                 switch (progress){
                     case 0:
                         mSpeedText.setText(R.string.speed10);
-                        speed = 10f;
+                        speed = 0.1f;
                         break;
                     case 1:
                         mSpeedText.setText(R.string.speed20);
-                        speed = 20f;
+                        speed = 0.2f;
                         break;
                     case 2:
                         mSpeedText.setText(R.string.speed30);
-                        speed = 30f;
+                        speed = 0.3f;
                         break;
                     case 3:
                         mSpeedText.setText(R.string.speed40);
-                        speed = 40f;
+                        speed = 0.4f;
                         break;
                     case 4:
                         mSpeedText.setText(R.string.speed50);
-                        speed = 50f;
+                        speed = 0.5f;
                         break;
                     case 5:
                         mSpeedText.setText(R.string.speed60);
-                        speed = 60f;
+                        speed = 0.6f;
                         break;
                     case 6:
                         mSpeedText.setText(R.string.speed70);
-                        speed = 70f;
+                        speed = 0.7f;
                         break;
                     case 7:
                         mSpeedText.setText(R.string.speed80);
-                        speed = 80f;
+                        speed = 0.8f;
                         break;
                     case 8:
                         mSpeedText.setText(R.string.speed90);
-                        speed = 90f;
+                        speed = 0.9f;
                         break;
                     case 9:
                         mSpeedText.setText(R.string.speed100);
-                        speed = 100f;
+                        speed = 1.0f;
                         break;
+                    default:
+                        mSpeedText.setText(R.string.speed40);
+                        speed = 0.4f;
+                        break;
+
                 }
             }
             @Override
@@ -117,12 +123,12 @@ public class MainActivity extends Activity {
         mCaptionTxt.setMovementMethod(LinkMovementMethod.getInstance());
         mCaptionTxt.setText(Html.fromHtml(howSyncHelp));
         mConnectSphero = (Button)findViewById(R.id.connectSpheroBtn);
-        //mConnectSphero.setVisibility(View.GONE);
+        //Connect the sphero
         initHub();
         mConnectSphero.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)mSpheroConnectionView.getLayoutParams();
+                RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) mSpheroConnectionView.getLayoutParams();
                 params.setMargins(0, 0, 0, 0);
                 mSpheroConnectionView.setLayoutParams(params);
             }
@@ -133,6 +139,8 @@ public class MainActivity extends Activity {
                 scanMyos();
             }
         });
+        //Keeps screen on
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         mCalibrationView = (CalibrationView)findViewById(R.id.CalibrationView);
         mCalibrationView.setColor(Color.WHITE);
         mCalibrationView.setCircleColor(Color.WHITE);
