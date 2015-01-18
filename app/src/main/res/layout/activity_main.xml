@@ -53,28 +53,29 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="31dp" />
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
-        android:ems="10"
-        android:id="@+id/speedEditText"
-        android:textColor="@color/primary_text"
-        android:layout_below="@+id/disconnectSpheroBtn"
-        android:layout_alignParentStart="true"
-        android:text="0.4"
-        android:gravity="center_horizontal" />
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/speed"
-        android:id="@+id/setSpeedBtn"
-        android:layout_below="@+id/speedEditText"
-        android:layout_alignParentStart="true" />
     <orbotix.view.connection.SpheroConnectionView
         android:id="@+id/sphero_connection_view"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:background="#FFF" />
+
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/speedSeekBar"
+        android:max="100"
+        android:layout_below="@+id/speedTextView"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="26dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/speed40"
+        android:id="@+id/speedTextView"
+        android:elevation="5dp"
+        android:textSize="@dimen/abc_text_size_medium_material"
+        android:layout_below="@+id/disconnectSpheroBtn"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>

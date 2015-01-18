@@ -21,5 +21,14 @@
     <string name="disconnectSphero">Disconnect my Sphero</string>
     <string name="unlock">Myo is unlocked, perform gestures to move the Sphero</string>
     <string name="lock">Myo is locked, double tap to unlock</string>
-    <string name="speed">Set speed</string>
+    <string name="speed10">Speed: 10%</string>
+    <string name="speed20">Speed: 20%</string>
+    <string name="speed30">Speed: 30%</string>
+    <string name="speed40">Speed: 40%</string>
+    <string name="speed50">Speed: 50%</string>
+    <string name="speed60">Speed: 60%</string>
+    <string name="speed70">Speed: 70%</string>
+    <string name="speed80">Speed: 80%</string>
+    <string name="speed90">Speed: 90%</string>
+    <string name="speed100">Speed: 100%</string>
 </resources>

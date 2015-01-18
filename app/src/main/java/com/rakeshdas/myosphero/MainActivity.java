@@ -10,7 +10,7 @@ import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,9 +42,8 @@ public class MainActivity extends Activity {
     private String howSyncHelp = "<a href = 'https://support.getmyo.com/hc/en-us/articles/200755509-How-to-perform-the-sync-gesture'> How do I perform the sync gesture? </a>";
     private CalibrationView mCalibrationView;
     private Button mDisconnectSphero;
-    private EditText mSpeed;
-    private Button mSetSpeed;
     float speed = (float) 0.4;
+    private SeekBar mSpeedSeek;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +52,23 @@ public class MainActivity extends Activity {
         mConnect = (Button)findViewById(R.id.connectBtn);
         mText = (TextView)findViewById(R.id.mainTextView);
         mCaptionTxt = (TextView)findViewById(R.id.captionTextView);
+        mSpeedSeek = (SeekBar)findViewById(R.id.speedSeekBar);
+        mSpeedSeek.setMax(9);
+        mSpeedSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                Toast.makeText(mSpeedSeek.getContext(), "val:" + getConvertedValue(progress), Toast.LENGTH_LONG).show();
+            }
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
         mCaptionTxt.setClickable(true);
         mCaptionTxt.setMovementMethod(LinkMovementMethod.getInstance());
         mCaptionTxt.setText(Html.fromHtml(howSyncHelp));
@@ -75,14 +91,6 @@ public class MainActivity extends Activity {
         mCalibrationView.setColor(Color.WHITE);
         mCalibrationView.setCircleColor(Color.WHITE);
         mCalibrationView.enable();
-        mSpeed = (EditText)findViewById(R.id.speedEditText);
-        mSetSpeed = (Button)findViewById(R.id.setSpeedBtn);
-        mSetSpeed.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                speed = Float.parseFloat(mSpeed.getText().toString());
-            }
-        });
         mSpheroConnectionView = (SpheroConnectionView)findViewById(R.id.sphero_connection_view);mSpheroConnectionView.addConnectionListener(new ConnectionListener() {
             @Override
             public void onConnected(Robot robot) {
@@ -103,6 +111,11 @@ public class MainActivity extends Activity {
             }
         });
     }
+    public float getConvertedValue(int intVal){
+        speed = 0.5f * intVal;
+        return speed;
+    }
+
     private void initHub(){
         Hub hub = Hub.getInstance();
         if (hub.init(this)){
