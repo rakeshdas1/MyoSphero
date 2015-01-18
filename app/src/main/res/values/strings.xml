@@ -10,7 +10,7 @@
     <string name="sync">Perform the sync gesture</string>
     <string name="disconnectMyo">Disconnect my Myo</string>
     <string name="unsync">Arm lost!</string>
-    <string name="howSync">How do I perform the sync gesture?</string>
+    <string name="howSync"><a href = 'https://support.getmyo.com/hc/en-us/articles/200755509-How-to-perform-the-sync-gesture'> How do I perform the sync gesture? </a></string>
     <string name="pFist">Fist</string>
     <string name="pWaveIn">Wave In</string>
     <string name="pWaveOut">Wave Out</string>
@@ -31,4 +31,5 @@
     <string name="speed80">Speed: 80%</string>
     <string name="speed90">Speed: 90%</string>
     <string name="speed100">Speed: 100%</string>
+    <string name="armUnsyncHelp">Disconnect Myo and then reconnect again</string>
 </resources>
