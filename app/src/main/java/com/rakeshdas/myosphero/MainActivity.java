@@ -41,12 +41,12 @@ public class MainActivity extends Activity {
     private TextView mCaptionTxt;
     private SpheroConnectionView mSpheroConnectionView;
     private Sphero mRobot;
-    private String howSyncHelp = "<a href = 'https://support.getmyo.com/hc/en-us/articles/200755509-How-to-perform-the-sync-gesture'> How do I perform the sync gesture? </a>";
     private CalibrationView mCalibrationView;
     private Button mConnectSphero;
     float speed = (float) 0.4;
     private SeekBar mSpeedSeek;
     private TextView mSpeedText;
+    private boolean spheroConnected;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -119,12 +119,11 @@ public class MainActivity extends Activity {
 
             }
         });
-        mCaptionTxt.setClickable(true);
-        mCaptionTxt.setMovementMethod(LinkMovementMethod.getInstance());
-        mCaptionTxt.setText(Html.fromHtml(howSyncHelp));
         mConnectSphero = (Button)findViewById(R.id.connectSpheroBtn);
-        //Connect the sphero
+        spheroConnected = false;
+       //Init the hub for the Myo
         initHub();
+        //Connect the sphero
         mConnectSphero.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -157,6 +156,7 @@ public class MainActivity extends Activity {
                         mRobot.disconnect();
                     }
                 });
+                spheroConnected = true;
             }
 
             @Override
@@ -202,8 +202,11 @@ public class MainActivity extends Activity {
             super.onConnect(myo, timestamp);
             Toast.makeText(getApplicationContext(), "Myo Connected!", Toast.LENGTH_LONG).show();
             mText.setText(R.string.sync);
+            mCaptionTxt.setClickable(true);
+            mCaptionTxt.setMovementMethod(LinkMovementMethod.getInstance());
+            mCaptionTxt.setText(Html.fromHtml(String.valueOf(R.string.howSync)));
             mConnect.setText(R.string.disconnectMyo);
-            mCaptionTxt.setVisibility(View.VISIBLE);
+            myo.unlock(Myo.UnlockType.HOLD);
         }
 
         @Override
@@ -212,33 +215,30 @@ public class MainActivity extends Activity {
             Toast.makeText(getApplicationContext(), "Myo Disconnected!", Toast.LENGTH_LONG).show();
             mText.setText(R.string.main);
             mConnect.setText(R.string.connect);
-            mCaptionTxt.setVisibility(View.INVISIBLE);
         }
 
         @Override
         public void onArmSync(Myo myo, long timestamp, Arm arm, XDirection xDirection) {
             super.onArmSync(myo, timestamp, arm, xDirection);
             mText.setText(myo.getArm() == Arm.LEFT ? R.string.left : R.string.right);
-            mCaptionTxt.setVisibility(View.INVISIBLE);
         }
 
         @Override
         public void onArmUnsync(Myo myo, long timestamp) {
             super.onArmUnsync(myo, timestamp);
             mText.setText(R.string.unsync);
+            mCaptionTxt.setText(R.string.armUnsyncHelp);
         }
 
         @Override
         public void onUnlock(Myo myo, long timestamp) {
             super.onUnlock(myo, timestamp);
-            mCaptionTxt.setVisibility(View.VISIBLE);
             mCaptionTxt.setText(R.string.unlock);
         }
 
         @Override
         public void onLock(Myo myo, long timestamp) {
             super.onLock(myo, timestamp);
-            mCaptionTxt.setVisibility(View.VISIBLE);
             mCaptionTxt.setText(R.string.lock);
         }
 
@@ -247,29 +247,44 @@ public class MainActivity extends Activity {
             super.onPose(myo, timestamp, pose);
             switch (pose){
                 case FIST:{
+                    if(spheroConnected){
                     mText.setText(R.string.pFist);
                     mRobot.drive(0f, speed);
                     myo.unlock(Myo.UnlockType.HOLD);
-                    break;
+                    break;}
+                    else{
+                        Toast.makeText(getApplicationContext(), "Sphero isn't connected yet!", Toast.LENGTH_LONG).show();
+                    }
                 }
                 case FINGERS_SPREAD:{
+                    if(spheroConnected){
                     mText.setText(R.string.pFingersSpread);
                     mRobot.stop();
                     myo.unlock(Myo.UnlockType.HOLD);
-                    break;
+                    break;}
+                    else{
+                        Toast.makeText(getApplicationContext(), "Sphero isn't connected yet!", Toast.LENGTH_LONG).show();
+                    }
                 }
                 case WAVE_IN:{
+                    if(spheroConnected){
                     mText.setText(R.string.pWaveIn);
                     mRobot.drive(270f,speed);
                     myo.unlock(Myo.UnlockType.HOLD);
-                    break;
+                    break;}
+                    else{
+                        Toast.makeText(getApplicationContext(), "Sphero isn't connected yet!", Toast.LENGTH_LONG).show();
+                    }
                 }
                 case WAVE_OUT:{
+                    if(spheroConnected){
                     mText.setText(R.string.pWaveOut);
                     mRobot.drive(90f, speed);
                     myo.unlock(Myo.UnlockType.HOLD);
-
-                    break;
+                    break;}
+                    else{
+                        Toast.makeText(getApplicationContext(), "Sphero isn't connected yet!", Toast.LENGTH_LONG).show();
+                    }
                 }
 
             }
