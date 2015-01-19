@@ -120,6 +120,7 @@ public class MainActivity extends Activity {
             }
         });
         mConnectSphero = (Button)findViewById(R.id.connectSpheroBtn);
+        mConnectSphero.setEnabled(false);
         spheroConnected = false;
        //Init the hub for the Myo
         initHub();
@@ -207,6 +208,7 @@ public class MainActivity extends Activity {
             mCaptionTxt.setText(Html.fromHtml(String.valueOf(R.string.howSync)));
             mConnect.setText(R.string.disconnectMyo);
             myo.unlock(Myo.UnlockType.HOLD);
+            mConnectSphero.setEnabled(true);
         }
 
         @Override
