@@ -3,7 +3,6 @@ package com.rakeshdas.myosphero;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
@@ -29,23 +28,19 @@ import com.thalmic.myo.scanner.ScanActivity;
 import orbotix.robot.base.Robot;
 import orbotix.sphero.ConnectionListener;
 import orbotix.sphero.Sphero;
-import orbotix.view.calibration.CalibrationView;
 import orbotix.view.connection.SpheroConnectionView;
 
 
 public class MainActivity extends Activity {
 
-    private Button mConnect;
-    private TextView mText;
+    private Button mConnect, mConnectSphero, calibrateSphero;
+    private TextView mText, mCaptionTxt, mSpeedText, mPickSphero;
     private String TAG = "MyoSphero";
-    private TextView mCaptionTxt;
     private SpheroConnectionView mSpheroConnectionView;
     private Sphero mRobot;
-    private CalibrationView mCalibrationView;
-    private Button mConnectSphero;
+//    private CalibrationView mCalibrationView;
     float speed = (float) 0.4;
     private SeekBar mSpeedSeek;
-    private TextView mSpeedText;
     private boolean spheroConnected;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +52,8 @@ public class MainActivity extends Activity {
         mSpeedSeek = (SeekBar)findViewById(R.id.speedSeekBar);
         mSpeedSeek.setMax(9);
         mSpeedText = (TextView)findViewById(R.id.speedTextView);
+        mPickSphero = (TextView)findViewById(R.id.pickSpheroTextView);
+        mPickSphero.setVisibility(View.INVISIBLE);
         //Set the speed via the seekbar
         mSpeedSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -131,6 +128,8 @@ public class MainActivity extends Activity {
                 RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) mSpheroConnectionView.getLayoutParams();
                 params.setMargins(0, 0, 0, 0);
                 mSpheroConnectionView.setLayoutParams(params);
+                mPickSphero.bringToFront();
+                mPickSphero.setVisibility(View.VISIBLE);
             }
         });
         mConnect.setOnClickListener(new View.OnClickListener() {
@@ -140,16 +139,16 @@ public class MainActivity extends Activity {
             }
         });
         //Keeps screen on
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        mCalibrationView = (CalibrationView)findViewById(R.id.CalibrationView);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);/*
+        mCalibrationView = (CalibrationView)findViewById(CalibrationView);
         mCalibrationView.setColor(Color.WHITE);
         mCalibrationView.setCircleColor(Color.WHITE);
-        mCalibrationView.enable();
+        mCalibrationView.enable();*/
         mSpheroConnectionView = (SpheroConnectionView)findViewById(R.id.sphero_connection_view);mSpheroConnectionView.addConnectionListener(new ConnectionListener() {
             @Override
             public void onConnected(Robot robot) {
                 mRobot = (Sphero) robot;
-                mCalibrationView.setRobot(mRobot);
+                //mCalibrationView.setRobot(mRobot);
                 mConnectSphero.setText(R.string.disconnectSphero);
                 mConnectSphero.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -158,6 +157,7 @@ public class MainActivity extends Activity {
                     }
                 });
                 spheroConnected = true;
+                mPickSphero.setVisibility(View.INVISIBLE);
             }
 
             @Override
@@ -168,7 +168,7 @@ public class MainActivity extends Activity {
             @Override
             public void onDisconnected(Robot robot) {
                 Toast.makeText(getApplicationContext(), "Sphero disconnected!", Toast.LENGTH_LONG).show();
-                mSpheroConnectionView.startDiscovery();
+                mConnectSphero.setText(R.string.connectSphero);
             }
         });
     }
@@ -204,8 +204,8 @@ public class MainActivity extends Activity {
             Toast.makeText(getApplicationContext(), "Myo Connected!", Toast.LENGTH_LONG).show();
             mText.setText(R.string.sync);
             mCaptionTxt.setClickable(true);
+            mCaptionTxt.setText(Html.fromHtml("<a href = 'https://support.getmyo.com/hc/en-us/articles/200755509-How-to-perform-the-sync-gesture'> How do I perform the sync gesture? </a>"));
             mCaptionTxt.setMovementMethod(LinkMovementMethod.getInstance());
-            mCaptionTxt.setText(Html.fromHtml(String.valueOf(R.string.howSync)));
             mConnect.setText(R.string.disconnectMyo);
             myo.unlock(Myo.UnlockType.HOLD);
             mConnectSphero.setEnabled(true);
@@ -223,6 +223,7 @@ public class MainActivity extends Activity {
         public void onArmSync(Myo myo, long timestamp, Arm arm, XDirection xDirection) {
             super.onArmSync(myo, timestamp, arm, xDirection);
             mText.setText(myo.getArm() == Arm.LEFT ? R.string.left : R.string.right);
+            mCaptionTxt.setText(R.string.lock);
         }
 
         @Override
@@ -308,7 +309,6 @@ public class MainActivity extends Activity {
     @Override
     protected void onResume(){
         super.onResume();
-        mSpheroConnectionView.startDiscovery();
     }
     @Override
     protected void onPause(){

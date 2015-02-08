@@ -12,9 +12,10 @@
         android:layout_height="wrap_content"
         android:text="@string/connect"
         android:id="@+id/connectBtn"
-        android:layout_centerVertical="true"
+        android:elevation="5dp"
+        android:layout_below="@+id/mainTextView"
         android:layout_centerHorizontal="true"
-        android:elevation="5dp"/>
+        android:layout_marginTop="76dp" />
 
 
     <TextView
@@ -39,18 +40,13 @@
         android:elevation="5dp"
         android:textSize="@dimen/abc_text_size_small_material"
         android:textColor="@color/primary_text"/>
-    <orbotix.view.calibration.CalibrationView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:id="@+id/CalibrationView"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/connectSphero"
         android:id="@+id/connectSpheroBtn"
         android:layout_below="@+id/connectBtn"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="31dp" />
+        android:layout_centerHorizontal="true" />
     <SeekBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -68,9 +64,10 @@
         android:id="@+id/speedTextView"
         android:elevation="5dp"
         android:textSize="@dimen/abc_text_size_medium_material"
+        android:textColor="@color/primary_text"
+        android:layout_marginTop="45dp"
         android:layout_below="@+id/connectSpheroBtn"
-        android:layout_centerHorizontal="true"
-        android:textColor="@color/primary_text"/>
+        android:layout_alignEnd="@+id/mainTextView" />
 
     <orbotix.view.connection.SpheroConnectionView
         android:id="@+id/sphero_connection_view"
@@ -78,4 +75,22 @@
         android:layout_height="fill_parent"
         android:layout_marginTop="900dp"
         android:background="#FFF"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/pickSphero"
+        android:id="@+id/pickSpheroTextView"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="@dimen/abc_text_size_small_material"
+        android:gravity="center"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/calibrateSphero"
+        android:id="@+id/calibrateSpheroBtn"
+        android:layout_below="@+id/connectSpheroBtn"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

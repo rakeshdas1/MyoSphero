@@ -32,4 +32,6 @@
     <string name="speed90">Speed: 90%</string>
     <string name="speed100">Speed: 100%</string>
     <string name="armUnsyncHelp">Disconnect Myo and then reconnect again</string>
+    <string name="pickSphero">Choose a sphero to connect to, make you sure paired it first.</string>
+    <string name="calibrateSphero">Calibrate my Sphero</string>
 </resources>
