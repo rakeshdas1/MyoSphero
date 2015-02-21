@@ -33,8 +33,8 @@ import orbotix.view.connection.SpheroConnectionView;
 
 public class MainActivity extends Activity {
 
-    private Button mConnect, mConnectSphero, calibrateSphero;
-    private TextView mText, mCaptionTxt, mSpeedText, mPickSphero;
+    private Button mConnect, mConnectSphero, mCalibrateSphero;
+    private TextView mText, mCaptionTxt, mSpeedText;
     private String TAG = "MyoSphero";
     private SpheroConnectionView mSpheroConnectionView;
     private Sphero mRobot;
@@ -49,11 +49,10 @@ public class MainActivity extends Activity {
         mConnect = (Button)findViewById(R.id.connectBtn);
         mText = (TextView)findViewById(R.id.mainTextView);
         mCaptionTxt = (TextView)findViewById(R.id.captionTextView);
+        mCalibrateSphero = (Button) findViewById(R.id.calibrateSpheroBtn);
         mSpeedSeek = (SeekBar)findViewById(R.id.speedSeekBar);
         mSpeedSeek.setMax(9);
         mSpeedText = (TextView)findViewById(R.id.speedTextView);
-        mPickSphero = (TextView)findViewById(R.id.pickSpheroTextView);
-        mPickSphero.setVisibility(View.INVISIBLE);
         //Set the speed via the seekbar
         mSpeedSeek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -128,8 +127,6 @@ public class MainActivity extends Activity {
                 RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) mSpheroConnectionView.getLayoutParams();
                 params.setMargins(0, 0, 0, 0);
                 mSpheroConnectionView.setLayoutParams(params);
-                mPickSphero.bringToFront();
-                mPickSphero.setVisibility(View.VISIBLE);
             }
         });
         mConnect.setOnClickListener(new View.OnClickListener() {
@@ -144,6 +141,15 @@ public class MainActivity extends Activity {
         mCalibrationView.setColor(Color.WHITE);
         mCalibrationView.setCircleColor(Color.WHITE);
         mCalibrationView.enable();*/
+        //Launch activity to calibrate the Sphero
+        mCalibrateSphero.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent calibrationIntent = new Intent(MainActivity.this, CalibrationActivity.class);
+                calibrationIntent.putExtra("Robot", mRobot);
+            }
+        });
+        //Connect Sphero by inflating the connection view
         mSpheroConnectionView = (SpheroConnectionView)findViewById(R.id.sphero_connection_view);mSpheroConnectionView.addConnectionListener(new ConnectionListener() {
             @Override
             public void onConnected(Robot robot) {
@@ -157,7 +163,7 @@ public class MainActivity extends Activity {
                     }
                 });
                 spheroConnected = true;
-                mPickSphero.setVisibility(View.INVISIBLE);
+                Toast.makeText(getApplicationContext(), R.string.pickSphero, Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -183,10 +189,12 @@ public class MainActivity extends Activity {
         }
         hub.addListener(mListener);
     }
+    //inflates view to connect Myo
     private void scanMyos(){
         Intent intent = new Intent(this, ScanActivity.class);
         startActivity(intent);
     }
+    //DeviceListener fot Myo
     private DeviceListener mListener = new AbstractDeviceListener() {
         @Override
         public void onAttach(Myo myo, long timestamp) {
@@ -311,6 +319,7 @@ public class MainActivity extends Activity {
         super.onResume();
     }
     @Override
+    //Disconnects Sphero on exit
     protected void onPause(){
         super.onPause();
         BluetoothAdapter.getDefaultAdapter().cancelDiscovery();

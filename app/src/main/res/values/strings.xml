@@ -34,4 +34,6 @@
     <string name="armUnsyncHelp">Disconnect Myo and then reconnect again</string>
     <string name="pickSphero">Choose a sphero to connect to, make you sure paired it first.</string>
     <string name="calibrateSphero">Calibrate my Sphero</string>
+    <string name="title_activity_calibration">CalibrationActivity</string>
+    <string name="calibrationInstructions">Calibrate the Sphero by rotating with two fingers</string>
 </resources>
