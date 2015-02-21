@@ -25,6 +25,8 @@ import com.thalmic.myo.Quaternion;
 import com.thalmic.myo.XDirection;
 import com.thalmic.myo.scanner.ScanActivity;
 
+import java.io.Serializable;
+
 import orbotix.robot.base.Robot;
 import orbotix.sphero.ConnectionListener;
 import orbotix.sphero.Sphero;
@@ -147,7 +149,7 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 Intent calibrationIntent = new Intent(MainActivity.this, CalibrationActivity.class);
                 mRobot.toString();
-                calibrationIntent.putExtra("Robot", mRobot);
+                calibrationIntent.putExtra("Robot", (Serializable) mRobot);
                 startActivity(calibrationIntent);
             }
         });

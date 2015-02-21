@@ -11,7 +11,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/abc_text_size_body_1_material"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:id="@+id/textView" />
+    <orbotix.robot.widgets.calibration.CalibrationView android:id="@+id/CalibrationView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/textView"/>
+
 
 
 </RelativeLayout>
