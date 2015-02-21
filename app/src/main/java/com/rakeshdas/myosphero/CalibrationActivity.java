@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import orbotix.sphero.Sphero;
+
 
 public class CalibrationActivity extends ActionBarActivity {
 
@@ -13,8 +15,10 @@ public class CalibrationActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calibration);
-        Intent calibartionIntent = getIntent();
-        getIntent().getIntExtra("", -1);
+        Intent calibrationIntent = getIntent();
+        Bundle bundle = getIntent().getExtras();
+        Sphero mRobot = bundle.getString("Robot");
+
 
     }
 

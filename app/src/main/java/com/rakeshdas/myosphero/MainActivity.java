@@ -43,7 +43,7 @@ public class MainActivity extends Activity {
     private SeekBar mSpeedSeek;
     private boolean spheroConnected;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mConnect = (Button)findViewById(R.id.connectBtn);
@@ -146,7 +146,9 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent calibrationIntent = new Intent(MainActivity.this, CalibrationActivity.class);
+                mRobot.toString();
                 calibrationIntent.putExtra("Robot", mRobot);
+                startActivity(calibrationIntent);
             }
         });
         //Connect Sphero by inflating the connection view
