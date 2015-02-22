@@ -1,9 +1,9 @@
 package com.rakeshdas.myosphero;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -11,7 +11,7 @@ import orbotix.sphero.Sphero;
 import orbotix.view.calibration.CalibrationView;
 
 
-public class CalibrationActivity extends ActionBarActivity {
+public class CalibrationActivity extends Activity {
 private CalibrationView mCalibrationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,10 +20,11 @@ private CalibrationView mCalibrationView;
         mCalibrationView = (CalibrationView)findViewById(R.id.CalibrationView);
         Intent calibrationIntent = getIntent();
         Bundle bundle = getIntent().getExtras();
-        Sphero mRobot = (Sphero) bundle.getSerializable("Robot");
+        Sphero mRobot = (Sphero) bundle.getParcelable("Robot");
         mCalibrationView = (CalibrationView)findViewById(R.id.CalibrationView);
         mCalibrationView.setColor(Color.WHITE);
         mCalibrationView.setCircleColor(Color.WHITE);
+        mCalibrationView.setRobot(mRobot);
         mCalibrationView.enable();
     }
 

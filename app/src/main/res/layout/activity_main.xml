@@ -34,12 +34,12 @@
         android:layout_height="wrap_content"
         android:text=""
         android:id="@+id/captionTextView"
-        android:layout_above="@+id/connectBtn"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="30dp"
         android:elevation="5dp"
         android:textSize="@dimen/abc_text_size_small_material"
-        android:textColor="@color/primary_text"/>
+        android:textColor="@color/primary_text"
+        android:layout_below="@+id/mainTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp" />
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
