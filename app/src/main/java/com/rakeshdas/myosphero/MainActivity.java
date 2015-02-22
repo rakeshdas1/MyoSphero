@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
@@ -147,7 +146,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent calibrationIntent = new Intent(MainActivity.this, CalibrationActivity.class);
-                calibrationIntent.putExtra("Robot", (Parcelable) mRobot);
+                //calibrationIntent.putExtra("Robot", (Parcelable) mRobot);
                 startActivity(calibrationIntent);
             }
         });

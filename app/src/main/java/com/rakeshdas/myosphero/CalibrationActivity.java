@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import orbotix.sphero.Sphero;
 import orbotix.view.calibration.CalibrationView;
 
 
@@ -20,11 +19,11 @@ private CalibrationView mCalibrationView;
         mCalibrationView = (CalibrationView)findViewById(R.id.CalibrationView);
         Intent calibrationIntent = getIntent();
         Bundle bundle = getIntent().getExtras();
-        Sphero mRobot = (Sphero) bundle.getParcelable("Robot");
+        //Sphero mRobot = (Sphero) bundle.getParcelable("Robot");
         mCalibrationView = (CalibrationView)findViewById(R.id.CalibrationView);
         mCalibrationView.setColor(Color.WHITE);
         mCalibrationView.setCircleColor(Color.WHITE);
-        mCalibrationView.setRobot(mRobot);
+        //mCalibrationView.setRobot(mRobot);
         mCalibrationView.enable();
     }
 
