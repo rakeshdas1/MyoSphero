@@ -59,47 +59,47 @@ public class MainActivity extends Activity {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 switch (progress){
                     case 0:
-                        mSpeedText.setText(R.string.speed10);
+                        mSpeedText.setText(R.string.speed_10);
                         speed = 0.1f;
                         break;
                     case 1:
-                        mSpeedText.setText(R.string.speed20);
+                        mSpeedText.setText(R.string.speed_20);
                         speed = 0.2f;
                         break;
                     case 2:
-                        mSpeedText.setText(R.string.speed30);
+                        mSpeedText.setText(R.string.speed_30);
                         speed = 0.3f;
                         break;
                     case 3:
-                        mSpeedText.setText(R.string.speed40);
+                        mSpeedText.setText(R.string.speed_40);
                         speed = 0.4f;
                         break;
                     case 4:
-                        mSpeedText.setText(R.string.speed50);
+                        mSpeedText.setText(R.string.speed_50);
                         speed = 0.5f;
                         break;
                     case 5:
-                        mSpeedText.setText(R.string.speed60);
+                        mSpeedText.setText(R.string.speed_60);
                         speed = 0.6f;
                         break;
                     case 6:
-                        mSpeedText.setText(R.string.speed70);
+                        mSpeedText.setText(R.string.speed_70);
                         speed = 0.7f;
                         break;
                     case 7:
-                        mSpeedText.setText(R.string.speed80);
+                        mSpeedText.setText(R.string.speed_80);
                         speed = 0.8f;
                         break;
                     case 8:
-                        mSpeedText.setText(R.string.speed90);
+                        mSpeedText.setText(R.string.speed_90);
                         speed = 0.9f;
                         break;
                     case 9:
-                        mSpeedText.setText(R.string.speed100);
+                        mSpeedText.setText(R.string.speed_100);
                         speed = 1.0f;
                         break;
                     default:
-                        mSpeedText.setText(R.string.speed40);
+                        mSpeedText.setText(R.string.speed_40);
                         speed = 0.4f;
                         break;
 
@@ -156,7 +156,7 @@ public class MainActivity extends Activity {
             public void onConnected(Robot robot) {
                 mRobot = (Sphero) robot;
                 //mCalibrationView.setRobot(mRobot);
-                mConnectSphero.setText(R.string.disconnectSphero);
+                mConnectSphero.setText(R.string.disconnect_sphero);
                 mConnectSphero.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -164,7 +164,7 @@ public class MainActivity extends Activity {
                     }
                 });
                 spheroConnected = true;
-                Toast.makeText(getApplicationContext(), R.string.pickSphero, Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.pick_sphero, Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -175,7 +175,7 @@ public class MainActivity extends Activity {
             @Override
             public void onDisconnected(Robot robot) {
                 Toast.makeText(getApplicationContext(), "Sphero disconnected!", Toast.LENGTH_LONG).show();
-                mConnectSphero.setText(R.string.connectSphero);
+                mConnectSphero.setText(R.string.connect_sphero);
             }
         });
     }
@@ -215,7 +215,7 @@ public class MainActivity extends Activity {
             mCaptionTxt.setClickable(true);
             mCaptionTxt.setText(Html.fromHtml("<a href = 'https://support.getmyo.com/hc/en-us/articles/200755509-How-to-perform-the-sync-gesture'> How do I perform the sync gesture? </a>"));
             mCaptionTxt.setMovementMethod(LinkMovementMethod.getInstance());
-            mConnect.setText(R.string.disconnectMyo);
+            mConnect.setText(R.string.disconnect_myo);
             myo.unlock(Myo.UnlockType.HOLD);
             mConnectSphero.setEnabled(true);
         }
@@ -239,7 +239,7 @@ public class MainActivity extends Activity {
         public void onArmUnsync(Myo myo, long timestamp) {
             super.onArmUnsync(myo, timestamp);
             mText.setText(R.string.unsync);
-            mCaptionTxt.setText(R.string.armUnsyncHelp);
+            mCaptionTxt.setText(R.string.arm_unsync_help);
         }
 
         @Override
@@ -260,7 +260,7 @@ public class MainActivity extends Activity {
             switch (pose){
                 case FIST:{
                     if(spheroConnected){
-                    mText.setText(R.string.pFist);
+                    mText.setText(R.string.p_fist);
                     mRobot.drive(0f, speed);
                     myo.unlock(Myo.UnlockType.HOLD);
                     break;}
@@ -270,7 +270,7 @@ public class MainActivity extends Activity {
                 }
                 case FINGERS_SPREAD:{
                     if(spheroConnected){
-                    mText.setText(R.string.pFingersSpread);
+                    mText.setText(R.string.p_fingers_spread);
                     mRobot.stop();
                     myo.unlock(Myo.UnlockType.HOLD);
                     break;}
@@ -280,7 +280,7 @@ public class MainActivity extends Activity {
                 }
                 case WAVE_IN:{
                     if(spheroConnected){
-                    mText.setText(R.string.pWaveIn);
+                    mText.setText(R.string.p_wave_in);
                     mRobot.drive(270f,speed);
                     myo.unlock(Myo.UnlockType.HOLD);
                     break;}
@@ -290,7 +290,7 @@ public class MainActivity extends Activity {
                 }
                 case WAVE_OUT:{
                     if(spheroConnected){
-                    mText.setText(R.string.pWaveOut);
+                    mText.setText(R.string.p_wave_out);
                     mRobot.drive(90f, speed);
                     myo.unlock(Myo.UnlockType.HOLD);
                     break;}

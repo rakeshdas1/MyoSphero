@@ -43,7 +43,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/connectSphero"
+        android:text="@string/connect_sphero"
         android:id="@+id/connectSpheroBtn"
         android:layout_below="@+id/connectBtn"
         android:layout_centerHorizontal="true" />
@@ -60,7 +60,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/speed40"
+        android:text="@string/speed_40"
         android:id="@+id/speedTextView"
         android:elevation="5dp"
         android:textSize="@dimen/abc_text_size_medium_material"
@@ -79,7 +79,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/pickSphero"
+        android:text="@string/pick_sphero"
         android:id="@+id/pickSpheroTextView"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
@@ -89,7 +89,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/calibrateSphero"
+        android:text="@string/calibrate_sphero"
         android:id="@+id/calibrateSpheroBtn"
         android:layout_below="@+id/connectSpheroBtn"
         android:layout_centerHorizontal="true" />

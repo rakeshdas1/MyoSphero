@@ -7,7 +7,7 @@
     tools:context="com.rakeshdas.myosphero.CalibrationActivity">
 
     <TextView
-        android:text="@string/calibrationInstructions"
+        android:text="@string/calibration_instructions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/abc_text_size_body_1_material"
