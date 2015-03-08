@@ -13,11 +13,18 @@
         android:textSize="@dimen/abc_text_size_body_1_material"
         android:gravity="center"
         android:id="@+id/textView" />
-    <orbotix.view.calibration.CalibrationView
-        android:id="@+id/CalibrationView"
+    <orbotix.view.calibration.CalibrationButtonView
+        android:id="@+id/calibration_above"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@+id/textView"/>
+        android:layout_below="@+id/textView" />
+    <Button
+        android:id="@+id/calibration_button_above"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="O"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"/>
 
 
 
